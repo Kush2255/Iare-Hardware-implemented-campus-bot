@@ -70,7 +70,7 @@ src/
 
 This application can be deployed to various platforms:
 
-- **Vercel**: Connect your GitHub repository
+- **Vercel**: Connect your GitHub repository (see instructions below)
 - **Netlify**: Drag and drop the `dist` folder or connect via Git
 - **GitHub Pages**: Use GitHub Actions for automated deployment
 
@@ -78,6 +78,20 @@ To build for production:
 ```sh
 npm run build
 ```
+
+### Vercel (GitHub Actions) ⚡
+
+A GitHub Actions workflow has been added at `.github/workflows/deploy-to-vercel.yml` to deploy the project on pushes to the `main` branch. To enable automatic deployments:
+
+1. Sign in to https://vercel.com and create a project (or note your existing org and project IDs).
+2. Create a Vercel token: go to **Settings → Tokens → Generate Token** and copy it.
+3. In your GitHub repository, go to **Settings → Secrets → Actions** and add these secrets:
+   - `VERCEL_TOKEN` — the token created in step 2
+   - `VERCEL_ORG_ID` — your Vercel organization ID
+   - `VERCEL_PROJECT_ID` — your Vercel project ID
+4. Push to `main` — the workflow will build the site (`npm ci && npm run build`) and deploy to Vercel (`--prod`).
+
+If you prefer the Vercel UI, import this repository and set the framework preset to **Vite**, build command `npm run build`, and output directory `dist`.
 
 ## Contributing
 
